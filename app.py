@@ -34,7 +34,7 @@ motivos_retorno = [
     "Descobriu que o joelho estava bom o tempo todo",
     "Voltou por pura teimosia",
     "Voltar à ativa era aposta perdida com o sogro",
-    "Ouviu um "você é o cara" e se emocionou",
+    'Ouviu um "você é o cara" e se emocionou',
     "Sonhou que fazia 3 gols no rival e acordou suando",
     "Quer se aposentar de verdade em grande estilo",
     "Aceitou o desafio de jogar uma última Copa da Várzea"
