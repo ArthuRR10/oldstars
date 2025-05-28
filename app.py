@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from threading import Thread
 import random
 
 app = Flask(__name__)
@@ -42,22 +43,15 @@ motivos_retorno = [
 def gerar_atributos():
     return {
         "ritmo": random.randint(30, 85),
-        "finalização": random.randint(30, 90),
+        "finalizacao": random.randint(30, 90),
         "passe": random.randint(35, 90),
         "drible": random.randint(40, 95),
         "defesa": random.randint(20, 75),
-        "físico": random.randint(50, 95),
+        "fisico": random.randint(50, 95)
     }
 
-@app.route("/")
-def home():
-    return "Old Star está rodando!"
-
-@app.route("/old-star", methods=["GET"])
-def old_star():
-    nome = random.choice(["Zé das Couves", "Juca Bala", "Diguinho Monteiro", "Renatinho Show", "Paulo Grilo"])
-    nacionalidade = random.choice(["🇧🇷 Brasil", "🇦🇷 Argentina", "🇺🇾 Uruguai", "🇨🇱 Chile", "🇵🇾 Paraguai"])
-
+@app.route('/old-star', methods=['GET'])
+def gerar_old_star():
     idade = random.choice(idades)
     posicao_antiga = random.choice(posicoes)
     posicao_atual = random.choice(posicoes)
@@ -69,15 +63,15 @@ def old_star():
     atributos = gerar_atributos()
 
     return jsonify({
-        "nome": nome,
-        "nacionalidade": nacionalidade,
         "idade": idade,
-        "posição_antiga": posicao_antiga,
-        "posição_atual": posicao_atual,
-        "histórico_de_aposentadoria": historico,
-        "motivo_do_retorno": retorno,
-        "atributos_estilo_fifa": atributos
+        "posicao_antiga": posicao_antiga,
+        "posicao_atual": posicao_atual,
+        "historico_aposentadoria": historico,
+        "motivo_retorno": retorno,
+        "atributos": atributos
     })
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+def run():
+    app.run(host='0.0.0.0', port=8080)
+
+Thread(target=run).start()
