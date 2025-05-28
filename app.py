@@ -1,9 +1,8 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify
 import random
 
 app = Flask(__name__)
 
-# Dados fixos para gerar jogador
 idades = [24, 25, 26, 27, 28]
 
 posicoes = [
@@ -34,7 +33,7 @@ motivos_retorno = [
     "Descobriu que o joelho estava bom o tempo todo",
     "Voltou por pura teimosia",
     "Voltar à ativa era aposta perdida com o sogro",
-    'Ouviu um "você é o cara" e se emocionou',
+    "Ouviu um 'você é o cara' e se emocionou",
     "Sonhou que fazia 3 gols no rival e acordou suando",
     "Quer se aposentar de verdade em grande estilo",
     "Aceitou o desafio de jogar uma última Copa da Várzea"
@@ -54,14 +53,10 @@ def gerar_atributos():
 def home():
     return "Old Star está rodando!"
 
-@app.route("/old-star", methods=["POST"])
+@app.route("/old-star", methods=["GET"])
 def old_star():
-    data = request.get_json()
-    nome = data.get("nome")
-    nacionalidade = data.get("nacionalidade")
-
-    if not nome or not nacionalidade:
-        return jsonify({"erro": "Nome e nacionalidade são obrigatórios"}), 400
+    nome = random.choice(["Zé das Couves", "Juca Bala", "Diguinho Monteiro", "Renatinho Show", "Paulo Grilo"])
+    nacionalidade = random.choice(["🇧🇷 Brasil", "🇦🇷 Argentina", "🇺🇾 Uruguai", "🇨🇱 Chile", "🇵🇾 Paraguai"])
 
     idade = random.choice(idades)
     posicao_antiga = random.choice(posicoes)
